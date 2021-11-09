@@ -22,7 +22,9 @@ VHOSTS=/etc/apache2/sites-available/*.conf
 
 if [ $# -ne 2 ]
 then
-    echo "ERROR: $0 requires two parameters {virtual-host} {restart|reload}"
+    # echo "ERROR: $0 requires two parameters {virtual-host} {restart|reload}"
+    # exit 1
+    echo -e "\e[31mERROR:${0} requires \e[1m\e[33mtwo\e[0m \e[31mparameters\e[0m  \n * a virtual-host configuration \n * a service command"
     exit 1
 fi
 
@@ -55,7 +57,9 @@ done
 # We could not match the first argument to a virtual-host preset the user with an error
 if [ $FILEMATCH  == false ]
 then
-    echo "ERROR: ${CONFIG} is NOT a valid virtual-host. Please choose from the following ${VALID_VHOSTS} $VHOST"
+    # echo "ERROR: ${CONFIG} is NOT a valid virtual-host. Please choose from the following ${VALID_VHOSTS} $VHOST"
+    # exit 1
+    echo -e "\e[31mERROR:\e[0m \e[1m\e[33m${CONFIG}\e[0m \e[31mis NOT a valid virtual-host\e[0m \nPlease choose from the following ${VALID_VHOSTS}"
     exit 1
 fi
 
