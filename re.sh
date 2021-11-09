@@ -4,12 +4,12 @@ CONFIG="$1"
 COMMAND="$2"
 
 # List all of the configuration files in the _/etc/apache2/sites-available/_ directory
-VHOSTS_PATH=/etc/apache2/sites-available/*.conf
+# VHOSTS_PATH=/etc/apache2/sites-available/*.conf
 
-for FILENAME in $VHOSTS_PATH
-do
-  echo $FILENAME
-done
+# for FILENAME in $VHOSTS_PATH
+# do
+#   echo $FILENAME
+# done
 
 # Does the first parameter an actual virtual-host
 FILEMATCH=false
@@ -51,6 +51,13 @@ do
     break
   fi
 done
+
+# We could not match the first argument to a virtual-host preset the user with an error
+if [ $FILEMATCH  == false ]
+then
+    echo "ERROR: ${CONFIG} is NOT a valid virtual-host. Please choose from the following ${VALID_VHOSTS} $VHOST"
+    exit 1
+fi
 
 # only allow reload or restart.
 if [ "$COMMAND" == "reload" ] || [ "$COMMAND" == "restart" ]
